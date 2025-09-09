@@ -9,8 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Extras\ADM Dll Injector\" />
-    <Folder Include="Properties\Clients\1.7+\Doomsday\" />
-    <Folder Include="Properties\Clients\1.9+\" />
   </ItemGroup>
 
 </Project>

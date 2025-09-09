@@ -31,8 +31,7 @@ class Program
         },
         { "1.9+", new Dictionary<string, string>
             {
-                { "Krypton", Path.Combine(clientsDir, "Krypton.exe") },
-                { "Prestige", Path.Combine(clientsDir, "Prestige.exe") }
+                
             }
         }
     };
@@ -56,7 +55,7 @@ class Program
         contentDrawer?.Invoke();
     }
 
-    static void DrawMenuPanel()
+    static void DrawMenu()
     {
         int left = 2, top = 2, width = 22, height = 8;
         DrawPanel(left, top, width, height, " Commands ", () =>
@@ -79,29 +78,31 @@ class Program
         });
     }
 
-    static void DrawCreditsPanel()
+    static void DrawCredits()
     {
         int left = 25, top = 2, width = 32, height = 9;
         DrawPanel(left, top, width, height, " Credits ", () =>
         {
             Console.SetCursorPosition(left + 2, top + 2);
-            Console.Write("csaba: Goat");
+            Console.Write("csaba: Main Programmer");
             Console.SetCursorPosition(left + 2, top + 3);
-            Console.Write("Lyte: Rip");
+            Console.Write("Zero: Made the original");
         });
     }
 
-    static void DrawChangelogPanel()
+    static void DrawChangelog()
     {
         int left = 58, top = 2, width = 45, height = 9;
         DrawPanel(left, top, width, height, " Changelog ", () =>
         {
             Console.SetCursorPosition(left + 2, top + 2);
             Console.Write("V1.0 - Added Vape versions (4.16 - 4.18)");
+            Console.SetCursorPosition(left + 2, top + 3);
+            Console.Write("V1.01 Reduced File size + Improved code");
         });
     }
 
-    static void DrawConsoleOutputPanel()
+    static void DrawConsole()
     {
         int left = 2, top = 12, width = 101, height = 8;
         DrawPanel(left, top, width, height, " Console Output ", () =>
@@ -239,7 +240,7 @@ class Program
 
     static void DrawExtrasBox()
     {
-        string[] extras = { "ADM Dll injector" };
+        string[] extras = { "ADM Dll injector (Soon maybe never)" };
         int selectedExtra = 0;
         int width = 40, height = 7, left = 25, top = 7;
         bool inBox = true;
@@ -280,8 +281,6 @@ class Program
                     if (selectedExtra < extras.Length - 1) { selectedExtra++; Draw(); }
                     break;
                 case ConsoleKey.Enter:
-                    outputMessages.Add($"[System] Selected extra: {extras[selectedExtra]}");
-                    inBox = false;
                     break;
                 case ConsoleKey.Backspace:
                 case ConsoleKey.Escape:
@@ -297,10 +296,10 @@ class Program
         Console.Clear();
         Console.CursorVisible = false;
         Console.Title = "ADM | MC Client Loader (Recode)";
-        DrawMenuPanel();
-        DrawCreditsPanel();
-        DrawChangelogPanel();
-        DrawConsoleOutputPanel();
+        DrawMenu();
+        DrawCredits();
+        DrawChangelog();
+        DrawConsole();
     }
 
     static void Main()
@@ -343,17 +342,12 @@ class Program
                                 FileName = githubUrl,
                                 UseShellExecute = true
                             });
-                            outputMessages.Add($"[System] Opened GitHub: {githubUrl}");
+                            outputMessages.Add($"[System] Opening GitHub:");
                         }
                         catch (Exception ex)
                         {
                             outputMessages.Add($"[Error] Could not open GitHub: {ex.Message}");
                         }
-                        DrawUI();
-                    }
-                    else
-                    {
-                        outputMessages.Add($"[System] {menuItems[selected]} selected.");
                         DrawUI();
                     }
                     break;
@@ -364,7 +358,7 @@ class Program
         }
 
         Console.Clear();
-        Console.CursorVisible = true;
+        Console.CursorVisible = false;
         Console.WriteLine("Exiting");
     }
 }
